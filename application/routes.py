@@ -98,10 +98,11 @@ def account():
 @login_required
 def account_delete():
     user = current_user.id
+     
+    posts = Posts.query.filter_by(user_id=user).all()
+    for post in posts:
+        db.session.delete(post)
 
-    post = Posts.query.filter_by(id=user).first()
-    db.session.delete(post)
-    db.session.commit()
 
     account = Users.query.filter_by(id=user).first()
     logout_user()
