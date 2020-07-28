@@ -1,13 +1,13 @@
 {% extends 'layout.html' %}
 {% block body_content %}
+<p>Welcome to this web app!</p>
+{% for post in posts %}
+    <div>
+        <h3>{{ post.title }}</h3>
+        <span>by <i>{{ post.author.first_name }} {{ post.author.last_name }}</i></span>
+        <span>on the <i>{{ post.date_posted }}</i></span>
+        <p>{{ post.content }}</p>
+    </div>
+{% endfor %}
 
-
-    {% for post in posts %}
-        <div>
-		<h3><u>{{ post.title }}</u></h3>
-	    <h4>{{ post.first_name }}</p>
-		    {{ post.last_name }}<h4>
-			    <body>{{ post.content }}</body>
-        </div>
-    {% endfor %}
 {% endblock %}
