@@ -61,6 +61,20 @@ class TestViews(TestBase):
         self.assertEqual(response.status_code, 200)
 
 
+    def test_post_view(self):
+        with self.client:
+            self.client.post(url_for('login'), data=dict(email="admin@admin.com", password="admin2016"), follow_redirects=True)
+            response = self.client.get(url_for('post'))
+            self.assertEqual(response.status_code, 200)
+
+    def test_aboutpage_view(self):
+        """
+        Test that homepage is accessible without login
+        """
+        response = self.client.get(url_for('about'))
+        self.assertEqual(response.status_code, 200)
+
+
 
 class TestPosts(TestBase):
 
@@ -81,13 +95,3 @@ class TestPosts(TestBase):
             self.assertIn(b'Test Title', response.data)
 
 
-
-
-class TestPostRoute(TestBase):
-
-    def test_post_view(self):
-        
-        with self.client:
-            self.client.post(url_for('login'), data=dict(email="admin@admin.com", password="admin2016"), follow_redirects=True)
-            response = self.client.get(url_for('post'))
-            self.assertEqual(response.status_code, 200)
