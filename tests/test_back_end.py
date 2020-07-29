@@ -96,3 +96,18 @@ class TestPosts(TestBase):
             self.assertIn(b'Test Title', response.data)
 
 
+class TestLogin(TestBase):
+    def test_login(self):
+        
+        with self.client:
+            response = self.client.post(
+                '/login',
+                data=dict(
+                    email="admin@admin.com",
+                    password="admin2016"
+                ),
+                follow_redirects=True
+            )
+            self.assertIn(b'Home', response.data)
+
+
