@@ -71,8 +71,11 @@ class TestViews(TestBase):
         
         response = self.client.get(url_for('about'))
         self.assertEqual(response.status_code, 200)
+    
+    def test_register_view_(self):
 
-
+        response = self.client.get(url_for('register'))
+        self.assertEqual(response.status_code, 200)
 
 class TestPosts(TestBase):
 
